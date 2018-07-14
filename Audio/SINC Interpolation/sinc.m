@@ -1,36 +1,27 @@
 [AudioSample Fs] = audioread('Super Mario World Music.mp3');
 Audio = transpose(AudioSample);
-M = 10;
+M = 5;
 
-LowPass = fir1(2, pi/(M*22000), 'low');
-FiltWave = filter(LowPass, 1, Audio);
-DownS = downsample(FiltWave, 10);
-%UpS = upsample(DownS, 10);
-yp = resampleSINC(DownS, 10);
-%xp = resampleSINC(UpS, 10);
+DownS = decimate(Audio, M);
+Sinc = resampleSINC(DownS, M);
 
 figure(1);
-subplot(2,2,1);
-plot(AudioSample);
-title('Sinal de Entrada');
+subplot(2,1,1);
+plot(AudioSample, 'blue');hold on
+plot(DownS, 'red');hold off
+xlabel('Time(s)');
+ylabel('Amplitude');
+lgd = legend('Input Signal', 'Downsampled');
+lgd.FontSize = 10;
+lgd.FontWeight = 'bold'
 grid on
 
-subplot(2,2,2);
-plot(FiltWave);
-title('Low-Pass filter');
+subplot(2,1,2)
+plot(AudioSample, 'blue');hold on
+plot(Sinc, 'red');hold off
+xlabel('Time(s)');
+ylabel('Amplitude');
+lgd2 = legend('Input Signal', 'SINC Interpolation');
+lgd2.FontSize = 10;
+lgd2.FontWeight = 'bold'
 grid on
-
-subplot(2,2,3);
-plot(DownS);
-title('Filter -> Downsampling:fator 10');
-grid on
-
-subplot(2,2,4);
-plot(yp);
-title('Downsampling -> Interpolação SINC');
-grid on
-
-%subplot(2,2,4);
-%plot(xp);
-%title('Downsamplig -> Upsampling -> Interpolação SINC');
-%grid on
