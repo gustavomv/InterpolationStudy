@@ -2,16 +2,16 @@ pkg load signal
 close all
 clear all
 
-[AudioSample Fs] = audioread('Super Mario World Music.wav');
-AudTransp = transpose(AudioSample); 
+[Audio Fs] = audioread('Super Mario World Music.wav');
+%AudTransp = transpose(Audio); 
 M=5;
 
 DownS = decimate(Audio, M);
 
-TimeAudDowns = linspace (1,columns(DownS),columns(Downs));
+TimeAudDownS = linspace (1,rows(DownS),rows(DownS));
 
-AmpAudDowns = transpose(DownS);
+AmpAudDownS = transpose(DownS);
 
-lagrangepoly(TimeAudDowns,AmpAudDowns);
+lagrangepoly(TimeAudDownS,AmpAudDownS);
 
-plot(lagrangepoly(TimeAudDowns,AmpAudDowns));
+plot(lagrangepoly(TimeAudDownS,AmpAudDownS));
