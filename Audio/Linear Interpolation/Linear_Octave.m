@@ -49,8 +49,8 @@ AudioMag = abs(AudioDFT);
 LinearDFT = fft(Linear);
 LinearMag = abs(LinearDFT);
 
-plot(AudioMag, 'blue');hold on
-plot(LinearMag, 'red');hold off
+plot(AudioMag, 'b');hold on
+plot(LinearMag, 'r');hold off
 %-----------------------------------------------------------------------%
 
 %figure(1);
