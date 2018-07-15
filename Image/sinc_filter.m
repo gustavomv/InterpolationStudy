@@ -1,0 +1,9 @@
+function sincedIm = sinc_filter(grayscaleImage,_rows,_columns) % (imagem filtrada e escolonada em grayscale,linhas,colunas)
+[m n]=size(grayscaleImage); % pega dimensoes da image escolonada
+newImage=zeros(_rows,_columns); % buffer para o zero padding
+grayscaleImage=fft2(grayscaleImage); % aplica transformda de Fourier
+grayscaleImage=fftshift(grayscaleImage); % Butterworth lowpass
+newImage(round(_rows/2-m/2):round(_rows/2-m/2)+m-1,round(_columns/2-n/2):round(_columns/2-n/2)+n-1)=grayscaleImage(1:m,1:n);%criacao de nova image
+newImage=fftshift(newImage); % Butterworth lowpass na nova image
+newImage=ifft2(newImage); % transformda inversa de Fourier
+sincedIm = uint8(abs(newImage));
