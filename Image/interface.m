@@ -39,16 +39,17 @@ m = imresize(gauss_m2, 0.5);
 %-------------
 b = bli(m, im_size(1), im_size(2));
 n = nn(m, im_size(1), im_size(2));
-
+h = sinc_filter(m,im_size(1),im_size(2));
 
 %-------------
 % Imagem
 %-------------
 %figure
-subplot(2,2,1);imagesc(im_gray);colormap(gray);title('Original Gray');
-subplot(2,2,2);imagesc(m);colormap(gray);title('Lowpass and Downsampling');
-subplot(2,2,3);imagesc(n);colormap(gray);title('Neighbour');
-subplot(2,2,4);imagesc(b);colormap(gray);title('Bilinear');
+subplot(2,3,1);imagesc(im_gray);colormap(gray);title('Original Gray');
+subplot(2,3,2);imagesc(m);colormap(gray);title('Lowpass and Downsampling');
+subplot(2,3,4);imagesc(n);colormap(gray);title('Nearest Neighbour');
+subplot(2,3,5);imagesc(b);colormap(gray);title('Bilinear');
+subplot(2,3,6);imagesc(h);colormap(gray);title('Sinc Function');
 
 %-------------
 % Métricas comparativas
@@ -56,16 +57,16 @@ subplot(2,2,4);imagesc(b);colormap(gray);title('Bilinear');
  % CORRELAÇÃO
  corr_nn = corr2 (im_gray,n)  % Original <-> NN
  corr_bli = corr2 (im_gray,b) % Original <-> BLI
- %corr_m = corr2 (im_gray,h)  % Original <-> HQX
+ corr_sincf = corr2 (im_gray,h)  % Original <-> SINC
  
  % MEAN SQUARED ERROR (MSE)
  mse_nn = immse(im_gray, n)   % Original <-> NN
  mse_bli = immse(im_gray, b)   % Original <-> BLI
- %mse_hqx = immse(im_gray, n)   % Original <-> HQX
+ mse_sincf = immse(im_gray, h)   % Original <-> SINC
  
  % PEAK SIGNAL-TO-NOISE RATIO
  psnr_nn = psnr(n, im_gray)   % Original <-> NN
  psnr_bli = psnr(b, im_gray)  % Original <-> BLI
- %psnr_hqx = psnr(hqx, im_gray)  % Original <-> HQX
+ psnr_sincf = psnr(h, im_gray)  % Original <-> SINC
 
 %clear all;
