@@ -32,15 +32,14 @@ NMSE = (MSE*n)/aux;
 
 SNR = 10*log10(aux/(MSE*n));
 
+AudioDFT = fft(Audio);
+AudioMag = abs(AudioDFT);
+SincDFT = fft(Sinc);
+SincMag = abs(SincDFT);
+
+plot(AudioMag, 'blue');hold on
+plot(SincMag, 'red');hold off
 %-----------------------------------------------------------------------%
-
-%AudioF = (0:length(AudioSample)-1)*100/length(AudioSample); %Frequency vector
-%SincF = (0:length(Sinc)-1)*100/length(Sinc);
-
-%AudioDFT = fft(AudioSample);
-%SincDFT = fft(Sinc);
-%AudioMag = abs(AudioDFT);
-%SincMag = abs(SincDFT);
 
 %figure(1);
 %subplot(2,1,1);
