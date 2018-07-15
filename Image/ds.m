@@ -35,6 +35,6 @@ function downsampling = ds(input_image, factor_x, factor_y)
     endfor
   endfor
 
-  downsampling = Mds;
+  downsampling = uint8(Mds);
 
 endfunction

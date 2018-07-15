@@ -41,6 +41,6 @@ function output_image = bli(input_image, x_res, y_res)
     endfor
   endfor
   
-  output_image = M;
+  output_image = uint8(M);
   
 endfunction

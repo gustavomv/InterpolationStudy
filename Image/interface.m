@@ -50,4 +50,22 @@ subplot(2,2,2);imagesc(m);colormap(gray);title('Lowpass and Downsampling');
 subplot(2,2,3);imagesc(n);colormap(gray);title('Neighbour');
 subplot(2,2,4);imagesc(b);colormap(gray);title('Bilinear');
 
+%-------------
+% Métricas comparativas
+%-------------
+ % CORRELAÇÃO
+ corr_nn = corr2 (im_gray,n)  % Original <-> NN
+ corr_bli = corr2 (im_gray,b) % Original <-> BLI
+ %corr_m = corr2 (im_gray,h)  % Original <-> HQX
+ 
+ % MEAN SQUARED ERROR (MSE)
+ mse_nn = immse(im_gray, n)   % Original <-> NN
+ mse_bli = immse(im_gray, b)   % Original <-> BLI
+ %mse_hqx = immse(im_gray, n)   % Original <-> HQX
+ 
+ % PEAK SIGNAL-TO-NOISE RATIO
+ psnr_nn = psnr(n, im_gray)   % Original <-> NN
+ psnr_bli = psnr(b, im_gray)  % Original <-> BLI
+ %psnr_hqx = psnr(hqx, im_gray)  % Original <-> HQX
+
 %clear all;
