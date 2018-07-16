@@ -52,19 +52,31 @@ CubicMag = abs(CubicDFT);
 plot(AudioMag, 'b');hold on;
 plot(CubicMag, 'r');hold off;
 
-%figure(1);
-%subplot(2,1,1);
-%plot(AudioT, 'b');hold on
-%plot(DownS, 'r');hold off
-%xlabel('Time(s)');
-%ylabel('Amplitude');
-%legend('Input Signal', 'Downsampled');
-%grid on
+figure(1);
+subplot(2,1,1);
+plot(AudioT, 'b');hold on
+plot(DownS, 'r');hold off
+xlabel('Time(s)',"fontsize", 16);
+ylabel('Amplitude',"fontsize", 16);
+h = legend('Input Signal', 'Downsampled');
+set(h,"fontsize", 16);
+grid on
 
-%subplot(2,1,2)
-%plot(AudioT, 'b');hold on
-%plot(Cubic, 'r');hold off
-%xlabel('Time(s)');
-%ylabel('Amplitude');
-%legend('Input Signal', 'Cubic Interpolation');
-%grid on
+
+subplot(2,1,2)
+plot(AudioT, 'b');hold on
+plot(Cubic, 'r');hold off
+xlabel('Time(s)',"fontsize", 16);
+ylabel('Amplitude',"fontsize", 16);
+h = legend('Input Signal', 'Cubic Interpolation');
+set(h,"fontsize", 16);
+grid on
+
+figure(3);
+plot(AudioMag, 'b'); hold on
+plot(CubicMag, 'r'); hold off
+xlabel('Frequency(Hz)',"fontsize", 16);
+ylabel('Amplitude Spectrum',"fontsize", 16);
+h = legend('Input Signal', 'Cubic Interpolation');
+set(h,"fontsize", 16);
+title('Magnitude',"fontsize", 16);
