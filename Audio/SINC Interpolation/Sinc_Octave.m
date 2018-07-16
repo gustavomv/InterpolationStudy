@@ -1,45 +1,46 @@
-pkg load signal;
-clear
+pkg load signal; %Carregando os pacotes necessarios para utilizarmos funcoes de tratamento de sinais
+clear %Excluindo as variaveis existentes
 clc
 
-[AudioSample Fs] = audioread('Super Mario World Music.wav');
-Audio = transpose(AudioSample);
+[AudioSample Fs] = audioread('AudioFile.wav'); %Leitura e amostragem do arquivo de audio escolhido
+Audio = transpose(AudioSample); %Transformando as amostras do audio em um vetor 1xN
 
-M = 5;
-n = numel(Audio);
+M = 5;  %Fator a ser utilizado na decimacao do sinal
+N = numel(Audio); %Numero de elementos das amostras do sinal original
 
-DownS = decimate(Audio, M);
-Sinc = resampleSINC(DownS, M);
-Sinc = Sinc(1:n);
+DownS = decimate(Audio, M); %Utilizamos a funcao decimate() por conter um tratamento com filtro anti-aliasing, passa-baixa
+                            %mais especificamente, um filtro Chebyshev tipo I de oitava ordem
+Sinc = resampleSINC(DownS, M); %utilizcao da interpolacao sinc por meio de uma funcao criada no arquivo resampleSINC.m
+Sinc = Sinc(1:N); %ajustando o numero de elementos do sinal reconstruido para o mesmo numero de elementos do sinal original
 
 %------------------ Analise das Metricas ----------------------------%
-ME = abs(Audio - Sinc);
+ME = abs(Audio - Sinc); %Erro Maximo
 
 aux = 0;
-for i=1:n
+for i=1:N
   aux = aux + abs(Audio(1,i) - Sinc(1,i));
 end
-MAE = aux/n;
+MAE = aux/N; %Erro Medio Absoluto
 
 aux = 0;
-for i=1:n
+for i=1:N
   aux = aux + (abs(Audio(1,i) - Sinc(1,i)))^2;
 end
-MSE = aux/n;
-RMSE = sqrt(MSE);
+MSE = aux/N %Erro Medio Quadratico
+RMSE = sqrt(MSE); %Raiz do Erro Medio Quadratico
 
 aux = 0;
-for i=1:n
+for i=1:N
   aux = aux + Audio(1,i)^2;
 end 
-NMSE = (MSE*n)/aux;
+NMSE = (MSE*N)/aux; %Erro Medio Quadratico Normalizado
 
-SNR = 10*log10(aux/(MSE*n));
+SNR = 10*log10(aux/(MSE*N); %Relacao Sinal-Ruido
 
-AudioDFT = fft(Audio);
-AudioMag = abs(AudioDFT);
-SincDFT = fft(Sinc);
-SincMag = abs(SincDFT);
+AudioDFT = fft(Audio); %Transformada de Fourier do sinal original
+AudioMag = abs(AudioDFT); %Magnitude no dominio da frequencia
+SincDFT = fft(Sinc); %Transformada de Fourier do sinal reconstruido
+SincMag = abs(SincDFT); %Magnitude no dominio da frequencia
 %-----------------------------------------------------------------------%
 
 figure(1);
