@@ -1,5 +1,5 @@
 pkg load signal
-clear
+clear all
 clc
 
 [AudioSample Fs]= audioread('Super Mario World Music.wav');
