@@ -42,6 +42,25 @@ SincDFT = fft(Sinc);
 SincMag = abs(SincDFT);
 %-----------------------------------------------------------------------%
 
+figure(1);
+plot(AudioSample, 'b');hold on
+plot(DownS, 'r');hold off
+xlabel('Time(s)',"fontsize", 16);
+ylabel('Amplitude',"fontsize", 16);
+h = legend('Input Signal', 'Downsampled');
+set(h,"fontsize", 16);
+grid on
+
+figure(2)
+plot(AudioSample, 'b');hold on
+plot(Sinc, 'r');hold off
+xlabel('Time(s)',"fontsize", 16);
+ylabel('Amplitude',"fontsize", 16);
+h = legend('Input Signal', 'SINC Interpolation');
+set(h,"fontsize", 16);
+grid on
+
+figure(3);
 plot(AudioMag, 'b'); hold on
 plot(SincMag, 'r'); hold off
 xlabel('Frequency(Hz)',"fontsize", 16);
@@ -49,21 +68,3 @@ ylabel('Amplitude Spectrum',"fontsize", 16);
 h = legend('Input Signal', 'SINC Interpolation');
 set(h,"fontsize", 16);
 title('Magnitude',"fontsize", 16);
-%figure(1);
-%subplot(2,1,1);
-%plot(AudioSample, 'b');hold on
-%plot(DownS, 'r');hold off
-%xlabel('Time(s)');
-%ylabel('Amplitude');
-%legend('Input Signal', 'Downsampled');
-%grid on
-
-%subplot(2,1,2)
-%plot(AudioSample, 'b');hold on
-%plot(Sinc, 'r');hold off
-%xlabel('Time(s)');
-%ylabel('Amplitude');
-%legend('Input Signal', 'SINC Interpolation');
-%grid on
-
-%figure(2);
