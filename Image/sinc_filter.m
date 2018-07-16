@@ -6,4 +6,5 @@ grayscaleImage=fftshift(grayscaleImage); % Butterworth lowpass
 newImage(round(_rows/2-m/2):round(_rows/2-m/2)+m-1,round(_columns/2-n/2):round(_columns/2-n/2)+n-1)=grayscaleImage(1:m,1:n);%criacao de nova image
 newImage=fftshift(newImage); % Butterworth lowpass na nova image
 newImage=ifft2(newImage); % transformda inversa de Fourier
-sincedIm = uint8(abs(newImage));
+e17=ceil(_rows*_columns/(m*n));
+sincedIm = uint8(e17*abs((newImage)));
