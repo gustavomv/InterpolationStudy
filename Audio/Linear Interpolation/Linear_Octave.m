@@ -58,7 +58,7 @@ xlabel('Time(s)', "fontsize", 16);
 ylabel('Amplitude',"fontsize", 16);
 h=legend('Input Signal', 'Downsampled');
 set(h, "fontsize", 10);
-title('Linear Interpolation Result',"fontsize", 18);
+title('Downsampled',"fontsize", 18);
 grid on
 
 figure(2);
@@ -69,7 +69,7 @@ xlabel('Time(s)',"fontsize", 16);
 ylabel('Amplitude',"fontsize", 16);
 h=legend('Input Signal', 'Linear Interpolation');
 set(h, "fontsize", 10);
-title('Original Audio x Linear Interpolation', "fontsize", 18);
+title('Linear Interpolation Result', "fontsize", 18);
 grid on
 
 figure(3);
