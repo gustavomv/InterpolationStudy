@@ -50,30 +50,34 @@ LinearDFT = fft(Linear);
 LinearMag = abs(LinearDFT);
 
 %-----------------------------Results----------------------------------%
-
 figure(1);
-subplot(2,2,1);
+%subplot(2,2,1);
 plot(Audio, 'b');hold on
 plot(DownS, 'r');hold off
-xlabel('Time(s)');
-ylabel('Amplitude');
-legend('Input Signal', 'Downsampled');
-title('Original Audio x Reduced Audio');
+xlabel('Time(s)', "fontsize", 16);
+ylabel('Amplitude',"fontsize", 16);
+h=legend('Input Signal', 'Downsampled');
+set(h, "fontsize", 10);
+title('Linear Interpolation Result',"fontsize", 18);
 grid on
 
-subplot(2,2,2);
+figure(2);
+%subplot(2,2,2);
 plot(Audio, 'b');hold on
 plot(Linear, 'r');hold off
-xlabel('Time(s)');
-ylabel('Amplitude');
-legend('Input Signal', 'Linear Interpolation');
-title('Original Audio x Linear Interpolation');
+xlabel('Time(s)',"fontsize", 16);
+ylabel('Amplitude',"fontsize", 16);
+h=legend('Input Signal', 'Linear Interpolation');
+set(h, "fontsize", 10);
+title('Original Audio x Linear Interpolation', "fontsize", 18);
 grid on
 
-subplot(2,2,3);
+figure(3);
+%subplot(2,2,3);
 plot(AudioMag, 'b'); hold on
 plot(LinearMag, 'r'); hold off
-xlabel('Frequency(Hz)');
-ylabel('Amplitude Spectrum');
-legend('Input Signal', 'Linear Interpolation');
-title('Magnitude');
+xlabel('Frequency(Hz)',"fontsize", 12);
+ylabel('Amplitude Spectrum',"fontsize", 12);
+h=legend('Input Signal', 'Linear Interpolation');
+set(h,"fontsize", 10);
+title('Magnitude',"fontsize", 18);
