@@ -1,53 +1,55 @@
-pkg load signal
-clear all
+pkg load signal %Carregando os pacotes necessarios para utilizarmos funcoes de tratamento de sinais
+clear all %Excluindo as variaveis existentes
 clc
 
-[AudioSample Fs]= audioread('Super Mario World Music.wav');
-Audio = transpose(AudioSample);
+[AudioSample Fs]= audioread('AudioFile.wav'); %Leitura e amostragem do arquivo de audio escolhido
+Audio = transpose(AudioSample); %Transformando as amostras do audio em um vetor 1xN
 
-M = 5;
-n = numel(Audio);
+M = 5; %Fator a ser utilizado na decimacao do sinal
+n = numel(Audio); %Numero de elementos das amostras do sinal original
 
-DownS = decimate(Audio, M);
-DownS_Values = 0:length(DownS)-1;
-AudioSamples_Length = linspace(0, length(DownS), length(Audio));
-
-Linear = interp1(DownS_Values, DownS, AudioSamples_Length, 'linear');
+DownS = decimate(Audio, M); %Utilizamos a funcao decimate() por conter um tratamento com filtro anti-aliasing, passa-baixa
+                            %mais especificamente, um filtro Chebyshev tipo I de oitava ordem
+DownS_Values = 0:length(DownS)-1; %Criando um vetor com a mesma quantidade de elementos da amostra pos-decimacao
+AudioSamples_Length = linspace(0, length(DownS), length(Audio)); %Criando um vetor com a mesma quantidade de elementos da amostra do 
+                                                                 % sinal original, baseado nas amostras existentes pos-decimacao
+Linear = interp1(DownS_Values, DownS, AudioSamples_Length, 'linear'); %Interpolacao Linear, onde temos o vetor de elementos pos-decimacao
+                                                                      % e a quantidade de elementos que queremos pos-interpolacao
 
 for i=1:n
-    if isnan(Linear(1,i))
+    if isnan(Linear(1,i)) %Caso haja elementos que "nao sao numeros" na reconstrucao, substituimos eles por zeros
         Linear(1,i) = 0;
     end
 end
 
 %------------------ Analise das Metricas ----------------------------%
-ME = abs(Audio - Linear);
+ME = abs(Audio - Linear); %Erro Maximo
 
 aux = 0;
 for i=1:n
   aux = aux + abs(Audio(1,i) - Linear(1,i));
 end
-MAE = aux/n;
+MAE = aux/n; %Erro Medio Absoluto
 
 aux = 0;
 for i=1:n
   aux = aux + (abs(Audio(1,i) - Linear(1,i)))^2;
 end
-MSE = aux/n;
-RMSE = sqrt(MSE);
+MSE = aux/n; %Erro Medio Quadratico
+RMSE = sqrt(MSE); %Raiz do Erro Medio Quadratico
 
 aux = 0;
 for i=1:n
   aux = aux + Audio(1,i)^2;
 end 
-NMSE = (MSE*n)/aux;
+NMSE = (MSE*n)/aux;  %Erro Medio Quadratico Normalizado
 
-SNR = 10*log10(aux/(MSE*n));
+SNR = 10*log10(aux/(MSE*n)); %Relacao Sinal-Ruido
 
-AudioDFT = fft(Audio);
-AudioMag = abs(AudioDFT);
-LinearDFT = fft(Linear);
-LinearMag = abs(LinearDFT);
+AudioDFT = fft(Audio); %Transformada de Fourier do sinal original
+AudioMag = abs(AudioDFT); %Magnitude no dominio da frequencia
+LinearDFT = fft(Linear); %Transformada de Fourier do sinal reconstruido
+LinearMag = abs(LinearDFT);  %Magnitude no dominio da frequencia
 
 %-----------------------------Results----------------------------------%
 figure(1);
