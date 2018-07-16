@@ -4,35 +4,16 @@
 image = imread('images/image4.png', 'png');
 im_size = size(image);
 im_gray = rgb2gray(image);
- 
-%im = imresize(I, 0.5); No alliasing
-%b = ds(a, 2, 2); No alliasing
 
 %-------------
 % Filtro Passa baixa
 %-------------
-%mpad = padarray(im_gray, [4 4], "symmetric");
-%f_gauss = fspecial("gaussian", 9, 2);
-%gauss_m = filter2(f_gauss, mpad, "valid");
-%gauss_m = uint8(gauss_m);
-
 gauss_m2 = imsmooth(im_gray,"Gaussian");
 
 %-------------
 % Downsampling
 %-------------
 m = imresize(gauss_m2, 0.5);
-%mo = ds(image, 2, 2);
-%mo= uint8(mo);
-
-%-------------
-% Histograma
-%-------------
-%figure
-%subplot(2,2,1);imhist(im_gray);title('Original');
-%subplot(2,2,2);imhist(m);title('Downsampling');
-%subplot(2,2,3);imhist(gauss_m);title('Gaussian1');
-%subplot(2,2,4);imhist(gauss_m2);title('Gaussian2 imsmooth');
 
 %-------------
 % Filtros
@@ -54,6 +35,11 @@ subplot(2,3,6);imagesc(h);colormap(gray);title('Sinc Function','fontsize',14),se
 %-------------
 % Métricas comparativas
 %-------------
+ % ERROR MÁX
+ err_nn = max(max(im_gray - n)) % Original <-> NN
+ err_bli = max(max(im_gray - b)) % Original <-> BLI
+ err_sincf = max(max(im_gray - h)) % Original <-> SINC
+ 
  % CORRELAÇÃO
  corr_nn = corr2 (im_gray,n)  % Original <-> NN
  corr_bli = corr2 (im_gray,b) % Original <-> BLI
