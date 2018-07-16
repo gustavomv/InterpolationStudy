@@ -44,6 +44,8 @@ SincMag = abs(SincDFT);
 
 plot(AudioMag, 'b'); hold on
 plot(SincMag, 'r'); hold off
+xlabel('Frequency(Hz)');
+ylabel('Amplitude Spectrum');
 legend('Input Signal', 'SINC Interpolation');
 title('Magnitude');
 %figure(1);
