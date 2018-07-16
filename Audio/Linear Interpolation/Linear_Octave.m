@@ -51,6 +51,8 @@ LinearMag = abs(LinearDFT);
 
 plot(AudioMag, 'b'); hold on
 plot(LinearMag, 'r'); hold off
+xlabel('Frequency(Hz)');
+ylabel('Amplitude Spectrum');
 legend('Input Signal', 'Linear Interpolation');
 title('Magnitude');
 %-----------------------------------------------------------------------%
