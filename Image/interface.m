@@ -45,11 +45,11 @@ h = sinc_filter(m,im_size(1),im_size(2));
 % Imagem
 %-------------
 %figure
-subplot(2,3,1);imagesc(im_gray);colormap(gray);title('Original Gray');
-subplot(2,3,2);imagesc(m);colormap(gray);title('Lowpass and Downsampling');
-subplot(2,3,4);imagesc(n);colormap(gray);title('Nearest Neighbour');
-subplot(2,3,5);imagesc(b);colormap(gray);title('Bilinear');
-subplot(2,3,6);imagesc(h);colormap(gray);title('Sinc Function');
+subplot(2,3,1);imagesc(im_gray);colormap(gray);title('Original Gray','fontsize',14),set(gca, "fontsize", 10);
+subplot(2,3,2);imagesc(m);colormap(gray);title('Lowpass and Downsampling','fontsize',14),set(gca, "fontsize", 10);
+subplot(2,3,4);imagesc(n);colormap(gray);title('Nearest Neighbour','fontsize',14),set(gca, "fontsize", 10);
+subplot(2,3,5);imagesc(b);colormap(gray);title('Bilinear','fontsize',14),set(gca, "fontsize", 10);
+subplot(2,3,6);imagesc(h);colormap(gray);title('Sinc Function','fontsize',14),set(gca, "fontsize", 10);
 
 %-------------
 % Métricas comparativas
