@@ -49,27 +49,31 @@ AudioMag = abs(AudioDFT);
 LinearDFT = fft(Linear);
 LinearMag = abs(LinearDFT);
 
+%-----------------------------Results----------------------------------%
+
+figure(1);
+subplot(2,2,1);
+plot(Audio, 'b');hold on
+plot(DownS, 'r');hold off
+xlabel('Time(s)');
+ylabel('Amplitude');
+legend('Input Signal', 'Downsampled');
+title('Original Audio x Reduced Audio');
+grid on
+
+subplot(2,2,2);
+plot(Audio, 'b');hold on
+plot(Linear, 'r');hold off
+xlabel('Time(s)');
+ylabel('Amplitude');
+legend('Input Signal', 'Linear Interpolation');
+title('Original Audio x Linear Interpolation');
+grid on
+
+subplot(2,2,3);
 plot(AudioMag, 'b'); hold on
 plot(LinearMag, 'r'); hold off
 xlabel('Frequency(Hz)');
 ylabel('Amplitude Spectrum');
 legend('Input Signal', 'Linear Interpolation');
 title('Magnitude');
-%-----------------------------------------------------------------------%
-
-%figure(1);
-%subplot(2,1,1);
-%plot(Audio, 'b');hold on
-%plot(DownS, 'r');hold off
-%xlabel('Time(s)');
-%ylabel('Amplitude');
-%legend('Input Signal', 'Downsampled');
-%grid on
-
-%subplot(2,1,2)
-%plot(Audio, 'b');hold on
-%plot(Linear, 'r');hold off
-%xlabel('Time(s)');
-%ylabel('Amplitude');
-%legend('Input Signal', 'Linear Interpolation');
-%grid on
