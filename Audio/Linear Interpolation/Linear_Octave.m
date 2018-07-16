@@ -49,8 +49,10 @@ AudioMag = abs(AudioDFT);
 LinearDFT = fft(Linear);
 LinearMag = abs(LinearDFT);
 
-plot(AudioMag, 'b');hold on
-plot(LinearMag, 'r');hold off
+plot(AudioMag, 'b'); hold on
+plot(LinearMag, 'r'); hold off
+legend('Input Signal', 'Linear Interpolation');
+title('Magnitude');
 %-----------------------------------------------------------------------%
 
 %figure(1);
