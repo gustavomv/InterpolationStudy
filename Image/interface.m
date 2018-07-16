@@ -51,8 +51,8 @@ subplot(2,3,6);imagesc(h);colormap(gray);title('Sinc Function','fontsize',14),se
  mse_sincf = immse(im_gray, h)   % Original <-> SINC
  
  % PEAK SIGNAL-TO-NOISE RATIO
- psnr_nn = psnr(n, im_gray)   % Original <-> NN
- psnr_bli = psnr(b, im_gray)  % Original <-> BLI
- psnr_sincf = psnr(h, im_gray)  % Original <-> SINC
+ [psnr_nn snr_nn]= psnr(n, im_gray)   % Original <-> NN
+ [psnr_bli snr_bli] = psnr(b, im_gray)  % Original <-> BLI
+ [psnr_sincf snr_bli]= psnr(h, im_gray)  % Original <-> SINC
 
 %clear all;
